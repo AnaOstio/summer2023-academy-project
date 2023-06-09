@@ -1,22 +1,22 @@
 package co.empathy.academy.summer2023academyproject.controller;
 
+import co.empathy.academy.summer2023academyproject.service.ElasticService;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Map;
 
 @RestController
+@RequestMapping("/search")
 public class ElasticController {
 
     @Autowired
-    private RestTemplate restTemplate;
+    private ElasticService elasticService;
 
-    @GetMapping("/search")
+   /** @GetMapping("/search")
     public JSONObject getElasticInfo(@RequestParam String query) {
 
         String url = "http://localhost:9200";
@@ -31,5 +31,10 @@ public class ElasticController {
         }
         result.put("clusterName", name);
         return result;
+    }*/
+
+    @GetMapping("")
+    public JSONObject call(@RequestParam String query){
+        return elasticService.getClusterNameWithQuery(query);
     }
 }
