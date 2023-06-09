@@ -18,8 +18,10 @@ public class ElasticConfiguration {
     public ElasticsearchClient getElasticClient(){
 
         // Create the low-level client
+        // To put it on the Docker I have to change the HtppPost
+        // in this case to "elasticsearch"
         RestClient restClient = RestClient.builder(
-                new HttpHost("localhost", 9200)).build();
+                new HttpHost("elasticsearch", 9200)).build();
 
         // Create the transport with a Jackson mapper
         ElasticsearchTransport transport = new RestClientTransport(
